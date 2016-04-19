@@ -1,7 +1,6 @@
 class LocationsController < ApplicationController
   def index
     return_json = {}
-    return_json[:message] = "you are on a beautiful index route in an enchanted forest"
 
     if params[:x] && params[:y]
       # TODO: build Location#to_hash method
@@ -28,7 +27,7 @@ class LocationsController < ApplicationController
   end
 
   def show
-    return_json[:message] = "you are on a beautiful show page in an enchanted forest"
+    return_json = {}
     render json: return_json
   end
 end
