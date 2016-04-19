@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  has_many :location_objects, as: :objects
+  has_many :location_objects#, as: :objects
 
   # TODO: purportedly gives #wolves and #trees methods
   # has_many :wolves, :through => :location_objects, :source => :object, :source_type => 'Wolf'

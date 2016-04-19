@@ -7,5 +7,7 @@ class CreateLocationObjects < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :location_objects, [:object_id, :object_type]
   end
 end
