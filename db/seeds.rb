@@ -1,7 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+10.times do |x|
+  10.times do |y|
+    location = Location.create(x_coordinate: x + 1, y_coordinate: y + 1)
+
+    if location.save
+      puts "location created at #{location.x}, #{location.y}."
+    end
+  end
+end
