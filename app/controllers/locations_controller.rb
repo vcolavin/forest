@@ -1,9 +1,34 @@
 class LocationsController < ApplicationController
   def index
-    render json: "hey index"
+    return_json = {}
+    return_json[:message] = "you are on a beautiful index route in an enchanted forest"
+
+    if params[:x] && params[:y]
+      # TODO: build Location#to_hash method
+      location = Location.where(
+        x_coordinate: params[:x],
+        y_coordinate: params[:y]
+      ).first
+
+      if location
+        return_json[:location] = {
+          id: location.id,
+          x_coordinate: location.x,
+          y_coordinate: location.y
+        }
+      else
+        return_json[:location] = "nil"
+      end
+
+    else
+      return_json[:location] = "nil"
+    end
+
+    render json: return_json
   end
 
   def show
-    render json: "hey show"
+    return_json[:message] = "you are on a beautiful show page in an enchanted forest"
+    render json: return_json
   end
 end
