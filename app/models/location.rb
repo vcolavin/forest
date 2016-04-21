@@ -9,6 +9,13 @@ class Location < ActiveRecord::Base
   # this logic is duplicated at the DB level
   validates_uniqueness_of :x_coordinate, :scope => :y_coordinate
 
+  # TODO: could this be a scope? Make sure to avoid N1 errors too.
+  def objects
+    self.location_objects.map do |location_object|
+      location_object.object
+    end
+  end
+
   def x
     self.x_coordinate
   end
