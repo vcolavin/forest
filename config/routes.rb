@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :locations, only: [:index]
+  get "location", to: 'locations#show'
 
-  root "locations#index"
+  root "locations#show"
 end

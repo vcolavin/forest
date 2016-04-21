@@ -1,6 +1,5 @@
 class LocationsController < ApplicationController
-
-  def index
+  def show
     return_json = {}
 
   # TODO: move this location finding logic out to a callback or something? It's ugly.
@@ -35,11 +34,6 @@ class LocationsController < ApplicationController
       return_json[:location] = "nil"
     end
 
-    render json: return_json
-  end
-
-  def show
-    return_json = {}
     render json: return_json
   end
 end
