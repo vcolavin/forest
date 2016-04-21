@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Location" do
+describe Location do
   before :all do
     @location = Location.create(x_coordinate: 1, y_coordinate: 1)
     @wolf = Wolf.create(name: "Johnny", location: @location)
