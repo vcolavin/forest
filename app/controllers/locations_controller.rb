@@ -2,7 +2,7 @@ class LocationsController < ApplicationController
   def show
     return_json = {}
 
-  # TODO: move this location finding logic out to a callback or something? It's ugly.
+  # TODO: move this location finding logic out to a callback or something? It's ugly here.
     if params[:x] && params[:y]
 
       location = Location.find_by(
@@ -11,6 +11,8 @@ class LocationsController < ApplicationController
       )
 
       if location
+        # TODO: move all this hash building out to some JBuilder stuff
+
         return_json[:location] = {
           id: location.id,
           xCoordinate: location.x,
@@ -27,6 +29,7 @@ class LocationsController < ApplicationController
         end
 
       else
+        # TODO: ugh
         return_json[:location] = "nil"
       end
 
