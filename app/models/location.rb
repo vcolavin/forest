@@ -5,11 +5,10 @@ class Location < ActiveRecord::Base
   # has_many :wolves, :through => :location_objects, :source => :object, :source_type => 'Wolf'
   # has_many :trees, :through => :location_objects, :source => :object, :source_type => 'Tree'
 
-  # ensure there are no collisions
-  # this logic is duplicated at the DB level
   validates_uniqueness_of :x_coordinate, :scope => :y_coordinate
 
   # TODO: could this be a scope?
+  # TODO: It should be handled by the associations. That would be ideal. Why isn't it?
   def objects
     self.location_objects.includes(:object).map do |location_object|
       location_object.object
