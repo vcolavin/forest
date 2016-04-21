@@ -1,29 +1,30 @@
 class LocationsController < ApplicationController
+
   def index
     return_json = {}
 
+  # TODO: move this location finding logic out to a callback or something? It's ugly.
     if params[:x] && params[:y]
-      location = Location.where(
+
+      location = Location.find_by(
         x_coordinate: params[:x],
         y_coordinate: params[:y]
-      ).first
+      )
 
       if location
         return_json[:location] = {
           id: location.id,
-          x_coordinate: location.x,
-          y_coordinate: location.y
+          xCoordinate: location.x,
+          yCoordinate: location.y
         }
 
         objects = location.objects
 
-        if objects.any?
-          return_json[:location][:objects] = objects.map do |object|
-            {
-              type: object.class.to_s.downcase,
-              id: object.id
-            }
-          end
+        return_json[:location][:objects] = objects.map do |object|
+          {
+            type: object.class.to_s.downcase,
+            id: object.id
+          }
         end
 
       else
