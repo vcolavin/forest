@@ -1,14 +1,11 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.2.3'
-
 gem 'rails-api'
 
-gem 'spring', :group => :development
-
-
+gem 'pry'
 gem 'pg'
+gem 'spring', :group => :development
 
 
 
@@ -23,6 +20,3 @@ gem 'pg'
 
 # Deploy with Capistrano
 # gem 'capistrano', :group => :development
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
