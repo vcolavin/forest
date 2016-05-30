@@ -6,8 +6,8 @@ class Wolf < ActiveRecord::Base
 
   def to_builder
     Jbuilder.new do |json|
-      json.kind kind
-      json.name name
+      json.kind(kind)
+      json.name(name)
     end
   end
 end
