@@ -5,8 +5,9 @@ class Wolf < ActiveRecord::Base
   has_one :location, through: :location_objects
 
   def to_builder
-    Jbuilder.new do |wolf|
-      wolf.name name
+    Jbuilder.new do |json|
+      json.kind kind
+      json.name name
     end
   end
 end

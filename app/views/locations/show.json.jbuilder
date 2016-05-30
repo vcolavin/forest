@@ -1,7 +1,11 @@
 json.location do
   json.x @location.x
   json.y @location.y
-  json.objects @location.objects do |object|
-    json.(object, :kind, :name)
+
+  json.objects do
+    json.array! @location.objects.map {|object| object.to_builder.attributes!}
+    # json.array! @location.objects.map do |object|
+    #   object.to_builder.attributes!
+    # end
   end
 end
