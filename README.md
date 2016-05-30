@@ -21,6 +21,8 @@ Some thoughts and to-dos:
     - Speak, shout, etc.
     - Jump in place
     - Zoom in and out
-- Let's make this HATEOAS. This will probably be achieved by having a "layout" to the responses, where each object description is surrounded or wrapped by endpoint options, e.g. navigation, look, zoom, whatever.
+- Let's make this HATEOAS.
+  - Look into the url_for method for this
+  - This will probably be achieved by having a "layout" to the responses, where each object description is surrounded or wrapped by endpoint options, e.g. navigation, look, zoom, whatever.
 - Consider the chron job that makes things grow and move around. How does it work?
   - It will call every object's #live method, which will be largely custom per model. It will move if it can, it will blah blah blah.
