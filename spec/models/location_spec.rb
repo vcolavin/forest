@@ -10,12 +10,12 @@ describe Location do
   it {should have_many :objects}
 
   it "should be associated to a wolf" do
-    @location.objects.should include @wolf
-    @location.objects.should include @tree
+    expect(@location.objects).to include(@wolf)
+    expect(@location.objects).to include(@tree)
   end
 
   it "should have methods for scoping specific locatable objects" do
-    @location.wolves.should be [@wolf]
-    @location.trees.should be [@tree]
+    expect(@location.wolves).to match_array([@wolf])
+    expect(@location.trees).to match_array([@tree])
   end
 end

@@ -11,6 +11,7 @@ end
 
 # wolves and trees
 5.times do |i|
+  # TODO: ASSOCIATE THESE LIKE THIS: location: Location.random or something
   wolf = Wolf.create(name: "wolf #{i}")
   tree = Tree.create(number_of_branches: i)
 end

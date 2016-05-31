@@ -8,6 +8,7 @@ class Wolf < ActiveRecord::Base
     Jbuilder.new do |json|
       json.kind(kind)
       json.name(name)
+      # json.url(url)
     end
   end
 end
