@@ -1,9 +1,9 @@
 class Location < ActiveRecord::Base
-  has_many :location_objects #, as: :objects
+  has_many :location_objects , inverse_of: :location
 
   # purportedly gives #wolves and #trees methods
-  has_many :wolves, :through => :location_objects, :source => :object, :source_type => 'Wolf'
-  has_many :trees, :through => :location_objects, :source => :object, :source_type => 'Tree'
+  has_many :wolves, :through => :location_objects, :source => :object, :source_type => 'Wolf', inverse_of: :location
+  has_many :trees, :through => :location_objects, :source => :object, :source_type => 'Tree', inverse_of: :location
 
   validates_uniqueness_of :x_coordinate, :scope => :y_coordinate
 
