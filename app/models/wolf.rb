@@ -2,7 +2,7 @@ class Wolf < ActiveRecord::Base
   include ModelHelpers
 
   has_one :location_object, as: :object
-  has_one :location, through: :location_objects
+  has_one :location, through: :location_object, inverse_of: :wolves
 
   def to_builder
     Jbuilder.new do |json|
