@@ -1,3 +1,2 @@
-json.message "this is the general message"
-
-json.data JSON.parse(yield)
+json.message("You are in a forest.")
+json.data(JSON.parse(yield))
