@@ -145,6 +145,3 @@ DEPENDENCIES
   rspec-rails (~> 3.0)
   shoulda-matchers (~> 3.1)
   spring
-
-BUNDLED WITH
-   1.11.2
