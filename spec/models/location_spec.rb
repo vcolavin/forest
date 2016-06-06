@@ -1,21 +1,22 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Location do
-  before :all do
-    @location = Location.create(x_coordinate: 1, y_coordinate: 1)
-    @wolf = Wolf.create(name: "Johnny", location: @location)
-    @tree = Tree.create(number_of_branches: 4, location: @location)
-  end
+describe Location, type: :model do
 
-  it {should have_many :objects}
+  it { is_expected.to have_many(:location_objects) }
 
-  it "should be associated to a wolf" do
-    expect(@location.objects).to include(@wolf)
-    expect(@location.objects).to include(@tree)
-  end
+  context 'with a wolf and tree' do
+    let!(:location) { Location.create(x_coordinate: 99999, y_coordinate: 99999) }
+    let!(:wolf) { Wolf.create(name: "Johnny", location: location) }
+    let!(:tree) { Tree.create(number_of_branches: 4, location: location) }
 
-  it "should have methods for scoping specific locatable objects" do
-    expect(@location.wolves).to match_array([@wolf])
-    expect(@location.trees).to match_array([@tree])
+    it "should be associated to a wolf" do
+      expect(location.objects).to include(wolf)
+      expect(location.objects).to include(tree)
+    end
+
+    it "should have methods for scoping specific locatable objects" do
+      expect(location.wolves).to match_array([wolf])
+      expect(location.trees).to match_array([tree])
+    end
   end
 end
