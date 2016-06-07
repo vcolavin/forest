@@ -1,12 +1,12 @@
 # yuhh integration testing
 describe "GET Location" do
   it 'finds a location properly (happy path)'
-  it "it well formed; i.e. has the layout"
+  it "is well formed; i.e. has the layout"
   it "responds properly to a location that doesn't exist"
   it "responds to a request without parameters"
 end
 
-# spec/requests/api/v1/messages_spec.rb
+# for example
 # describe "Messages API" do
 #   it 'sends a list of messages' do
 #     FactoryGirl.create_list(:message, 10)

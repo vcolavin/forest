@@ -15,11 +15,13 @@ describe Location, type: :model do
       expect(location).not_to be_valid
       # expect(location.errors).to include(fdsafdsa)
     end
+
     it "should not create a location without one coordinate" do
       location = Location.new(x_coordinate: 1)
       expect(location).not_to be_valid
       # expect(location.errors).to include(fdsafdsa)
     end
+
     it "should not create a location with non-unique coordinates" do
       location_1 = Location.create(x_coordinate: 1, y_coordinate: 2)
       location_2 = Location.create(x_coordinate: 1, y_coordinate: 2)
