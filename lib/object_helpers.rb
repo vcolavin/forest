@@ -1,4 +1,4 @@
-module ModelHelpers
+module ObjectHelpers
   def kind
     self.class.to_s.downcase
   end
