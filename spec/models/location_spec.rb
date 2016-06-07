@@ -9,7 +9,7 @@ describe Location, type: :model do
     let!(:wolf) { Wolf.create(name: "Johnny", location: location) }
     let!(:tree) { Tree.create(number_of_branches: 4, location: location) }
 
-    it "should be associated to a wolf" do
+    it "should be associated to locatable objects" do
       expect(location.objects).to include(wolf)
       expect(location.objects).to include(tree)
     end
