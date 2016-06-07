@@ -4,6 +4,31 @@ describe Location, type: :model do
 
   it { is_expected.to have_many(:location_objects) }
 
+  context 'validations' do
+    it "should create a location" do
+      location = Location.new(x_coordinate: 1, y_coordinate: 2)
+      expect(location).to be_valid
+    end
+
+    it "should not create a location without both coordinates" do
+      location = Location.new()
+      expect(location).not_to be_valid
+      # expect(location.errors).to include(fdsafdsa)
+    end
+    it "should not create a location without one coordinate" do
+      location = Location.new(x_coordinate: 1)
+      expect(location).not_to be_valid
+      # expect(location.errors).to include(fdsafdsa)
+    end
+    it "should not create a location with non-unique coordinates" do
+      location_1 = Location.create(x_coordinate: 1, y_coordinate: 2)
+      location_2 = Location.create(x_coordinate: 1, y_coordinate: 2)
+
+      expect(location_2).to be_invalid
+      # expect(location.errors).to include(fdsafdsa)
+    end
+  end
+
   context 'with a wolf and tree' do
     let!(:location) { Location.create(x_coordinate: 1, y_coordinate: 1) }
     let!(:wolf) { Wolf.create(name: "Johnny", location: location) }
