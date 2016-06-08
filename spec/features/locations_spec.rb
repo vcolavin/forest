@@ -1,19 +1,20 @@
-# yuhh integration testing
-describe "Locations API", type: :controller do
+require 'rails_helper'
+
+describe "Locations API", type: :request do
   it "is well formed" do
     location = Location.create(x_coordinate: 1, y_coordinate: 1)
     wolf = Wolf.create(name: "joseph", location: location)
 
-    get 'location?x=1&y=1'
+    get '/location?x=1&y=1'
 
-    json = Json.parse(response.body)
+    json = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(json.message).not_to be_nil
-    expect(json.location).not_to be_nil
-    expect(json.location.objects).not_to be_nil
+    expect(json[:message]).not_to be_nil
+    expect(json[:location]).not_to be_nil
+    expect(json[:location][:objects]).not_to be_nil
 
-    expect(json.location.objects.first.name).to eq(wolf.name)
+    expect(json[:location][:objects].first[:name]).to eq(wolf.name)
   end
   it 'finds a location properly (happy path)'
   it "responds properly to a location that doesn't exist"
