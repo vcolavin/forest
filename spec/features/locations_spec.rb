@@ -10,13 +10,13 @@ describe "Locations API", type: :request do
     json = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(json[:message]).not_to be_nil
-    expect(json[:location]).not_to be_nil
-    expect(json[:location][:objects]).not_to be_nil
+    expect(json['message']).not_to be_nil
+    expect(json['location']).not_to be_nil
+    expect(json['location']['objects']).not_to be_nil
 
-    expect(json[:location][:objects].first[:name]).to eq(wolf.name)
+    expect(json['location']['objects'].first['name']).to eq(wolf.name)
   end
-  it 'finds a location properly (happy path)'
+
   it "responds properly to a location that doesn't exist"
   it "responds to a request without parameters"
 end
