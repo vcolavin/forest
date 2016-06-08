@@ -1,7 +1,21 @@
 # yuhh integration testing
-describe "GET Location" do
+describe "Locations API", type: :controller do
+  it "is well formed" do
+    location = Location.create(x_coordinate: 1, y_coordinate: 1)
+    wolf = Wolf.create(name: "joseph", location: location)
+
+    get 'location?x=1&y=1'
+
+    json = Json.parse(response.body)
+
+    expect(response).to be_success
+    expect(json.message).not_to be_nil
+    expect(json.location).not_to be_nil
+    expect(json.location.objects).not_to be_nil
+
+    expect(json.location.objects.first.name).to eq(wolf.name)
+  end
   it 'finds a location properly (happy path)'
-  it "is well formed; i.e. has the layout"
   it "responds properly to a location that doesn't exist"
   it "responds to a request without parameters"
 end

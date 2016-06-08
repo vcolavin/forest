@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Wolf do
+describe Wolf, type: :model do
   before :all do
     @location = Location.create(x_coordinate: 1, y_coordinate: 1)
     @wolf = Wolf.create(name: "Johnny", location: @location)
