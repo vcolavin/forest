@@ -6,22 +6,19 @@ gem 'rails-api'
 gem 'jbuilder'
 gem 'pry'
 gem 'pg'
-gem 'spring', :group => :development
 
-group :development, :test do
+group :development do
+  gem 'spring'
+end
+
+group :test, :development do
   gem 'rspec-rails', '~> 3.0'
 end
 
 group :test do
- gem 'database_cleaner'
- gem 'shoulda-matchers', '~> 3.1'
+  gem 'database_cleaner'
+  gem 'rspec'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
 # gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano', :group => :development

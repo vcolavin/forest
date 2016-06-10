@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Tree do
+describe Tree, type: :model do
   before :all do
     @location = Location.create(x_coordinate: 1, y_coordinate: 1)
     @tree = Tree.create(number_of_branches: 4, location: @location)
