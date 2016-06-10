@@ -4,12 +4,40 @@ describe Location, type: :model do
 
   it { is_expected.to have_many(:location_objects) }
 
+  context 'validations' do
+    it "should create a location" do
+      location = Location.new(x_coordinate: 1, y_coordinate: 2)
+      expect(location).to be_valid
+    end
+
+    it "should not create a location with neither coordinates" do
+      location = Location.new()
+      expect(location).not_to be_valid
+      expect(location.errors.full_messages).to include("x_coordinate can't be blank")
+      expect(location.errors.full_messages).to include("y_coordinate can't be blank")
+    end
+
+    it "should not create a location with only one coordinate" do
+      location = Location.new(x_coordinate: 1)
+      expect(location).not_to be_valid
+      expect(location.errors.full_messages).to include("y_coordinate can't be blank")
+    end
+
+    it "should not create a location with non-unique coordinates" do
+      location_1 = Location.create(x_coordinate: 1, y_coordinate: 2)
+      location_2 = Location.create(x_coordinate: 1, y_coordinate: 2)
+
+      expect(location_2).to be_invalid
+      expect(location.errors.full_messages).to include("coordinates must be unique")
+    end
+  end
+
   context 'with a wolf and tree' do
-    let!(:location) { Location.create(x_coordinate: 99999, y_coordinate: 99999) }
+    let!(:location) { Location.create(x_coordinate: 1, y_coordinate: 1) }
     let!(:wolf) { Wolf.create(name: "Johnny", location: location) }
     let!(:tree) { Tree.create(number_of_branches: 4, location: location) }
 
-    it "should be associated to a wolf" do
+    it "should be associated to locatable objects" do
       expect(location.objects).to include(wolf)
       expect(location.objects).to include(tree)
     end

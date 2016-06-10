@@ -26,4 +26,4 @@ Some thoughts and to-dos:
   - This will probably be achieved by having a "layout" to the responses, where each object description is surrounded or wrapped by endpoint options, e.g. navigation, look, zoom, whatever.
 - Consider the chron job that makes things grow and move around. How does it work?
   - It will call every object's #live method, which will be largely custom per model. It will move if it can, it will blah blah blah.
-- Why the hell won't the tests pass? I.e. what the heck is wrong with the way the associations are set up? Reverse polymorphism is TOTALLY COOL.
+  - Can a free Heroku account even handle chron jobs?

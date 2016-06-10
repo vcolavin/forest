@@ -99,6 +99,10 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (11.1.2)
+    rspec (3.3.0)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.1)
@@ -142,6 +146,7 @@ DEPENDENCIES
   pry
   rails (= 4.2.3)
   rails-api
+  rspec
   rspec-rails (~> 3.0)
   shoulda-matchers (~> 3.1)
   spring
