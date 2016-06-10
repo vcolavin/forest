@@ -10,16 +10,17 @@ describe Location, type: :model do
       expect(location).to be_valid
     end
 
-    it "should not create a location without both coordinates" do
+    it "should not create a location with neither coordinates" do
       location = Location.new()
       expect(location).not_to be_valid
-      # expect(location.errors).to include(fdsafdsa)
+      expect(location.errors.full_messages).to include("x_coordinate can't be blank")
+      expect(location.errors.full_messages).to include("y_coordinate can't be blank")
     end
 
-    it "should not create a location without one coordinate" do
+    it "should not create a location with only one coordinate" do
       location = Location.new(x_coordinate: 1)
       expect(location).not_to be_valid
-      # expect(location.errors).to include(fdsafdsa)
+      expect(location.errors.full_messages).to include("y_coordinate can't be blank")
     end
 
     it "should not create a location with non-unique coordinates" do
@@ -27,7 +28,7 @@ describe Location, type: :model do
       location_2 = Location.create(x_coordinate: 1, y_coordinate: 2)
 
       expect(location_2).to be_invalid
-      # expect(location.errors).to include(fdsafdsa)
+      expect(location.errors.full_messages).to include("coordinates must be unique")
     end
   end
 
