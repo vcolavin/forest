@@ -8,6 +8,7 @@ module ObjectHelpers
   def to_builder
     Jbuilder.new do |json|
       json.kind(kind)
+      json.message("this object doesn't have a to_builder method")
     end
   end
 end

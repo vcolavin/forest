@@ -9,7 +9,7 @@ describe "Locations API", type: :request do
 
     json = JSON.parse(response.body)
 
-    expect(response).to be_success
+    expect(response.status).to be(200)
     expect(json['message']).not_to be_nil
     expect(json['location']).not_to be_nil
     expect(json['location']['objects']).not_to be_nil
@@ -17,8 +17,18 @@ describe "Locations API", type: :request do
     expect(json['location']['objects'].first['name']).to eq(wolf.name)
   end
 
-  it "responds properly to a location that doesn't exist"
-  it "responds to a request without parameters"
+  it "responds properly to a location that doesn't exist" do
+    get '/location?x=100&y=1'
+
+    expect(response.status).to be(404)
+  end
+
+  it "responds to a request with poorly formed parameters" do
+    get '/location?x=100'
+
+    expect(response.status).to be(400)
+  end
+
 end
 
 # for example
