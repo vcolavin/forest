@@ -1,14 +1,12 @@
 class Location < ActiveRecord::Base
   has_many :location_objects , inverse_of: :location
 
-  # purportedly gives #wolves and #trees methods
   has_many :wolves, :through => :location_objects, :source => :object, :source_type => 'Wolf', inverse_of: :location
   has_many :trees, :through => :location_objects, :source => :object, :source_type => 'Tree', inverse_of: :location
 
-  validates_uniqueness_of :x_coordinate, :scope => :y_coordinate
-
   validates :x_coordinate, presence: true
   validates :y_coordinate, presence: true
+  validate :coordinates_must_be_unique
 
   # FIXME: This should be handled by the associations. That would be ideal. Why isn't it?
   def objects
@@ -23,5 +21,13 @@ class Location < ActiveRecord::Base
 
   def y
     self.y_coordinate
+  end
+
+  private
+
+  def coordinates_must_be_unique
+    if Location.find_by(x_coordinate: x, y_coordinate: y)
+      errors.add(:coordinates, "must be unique")
+    end
   end
 end

@@ -28,7 +28,7 @@ describe Location, type: :model do
       location_2 = Location.create(x_coordinate: 1, y_coordinate: 2)
 
       expect(location_2).to be_invalid
-      expect(location.errors.full_messages).to include("coordinates must be unique")
+      expect(location_2.errors.full_messages).to include("Coordinates must be unique")
     end
   end
 
