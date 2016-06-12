@@ -13,14 +13,14 @@ describe Location, type: :model do
     it "should not create a location with neither coordinates" do
       location = Location.new()
       expect(location).not_to be_valid
-      expect(location.errors.full_messages).to include("x_coordinate can't be blank")
-      expect(location.errors.full_messages).to include("y_coordinate can't be blank")
+      expect(location.errors.full_messages).to include("X coordinate can't be blank")
+      expect(location.errors.full_messages).to include("Y coordinate can't be blank")
     end
 
     it "should not create a location with only one coordinate" do
       location = Location.new(x_coordinate: 1)
       expect(location).not_to be_valid
-      expect(location.errors.full_messages).to include("y_coordinate can't be blank")
+      expect(location.errors.full_messages).to include("Y coordinate can't be blank")
     end
 
     it "should not create a location with non-unique coordinates" do

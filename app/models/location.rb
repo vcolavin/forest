@@ -7,6 +7,9 @@ class Location < ActiveRecord::Base
 
   validates_uniqueness_of :x_coordinate, :scope => :y_coordinate
 
+  validates :x_coordinate, presence: true
+  validates :y_coordinate, presence: true
+
   # FIXME: This should be handled by the associations. That would be ideal. Why isn't it?
   def objects
     self.location_objects.includes(:object).map do |location_object|
