@@ -6,5 +6,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root "locations#show", defaults: {format: :json}
+  root "api/v1/locations#show", defaults: {format: :json}, x: 1, y: 1
 end
