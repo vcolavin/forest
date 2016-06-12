@@ -11,7 +11,6 @@ describe "Locations API", type: :request do
 
     expect(response.status).to be(200)
 
-    binding.pry
     expect(json['message']).not_to be_nil
     expect(json['location']).not_to be_nil
     expect(json['location']['objects']).not_to be_nil
