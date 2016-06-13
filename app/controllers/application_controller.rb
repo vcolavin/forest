@@ -7,10 +7,10 @@ class ApplicationController < ActionController::API
 
   private
   def record_not_found(error)
-    render json: { error: error.message }, status: 404
+    render json: {error: error.message}, status: 404
   end
 
   def paramenter_missing(error)
-    render json: { error: error.message }, status: 400
+    render json: {error: error.message}, status: 400
   end
 end
