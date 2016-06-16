@@ -2,15 +2,17 @@ class ApplicationController < ActionController::API
   include ActionController::ImplicitRender
   include ActionView::Layouts
 
-  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-  rescue_from ActionController::ParameterMissing, :with => :paramenter_missing
+  rescue_from ActiveRecord::RecordNotFound, :with => :rescue_404
+  rescue_from ActionController::RoutingError, :with => :rescue_404
+
+  rescue_from ActionController::ParameterMissing, :with => :rescue_400
 
   private
-  def record_not_found(error)
-    render json: {error: error.message}, status: 404
+  def rescue_404(error)
+    render json: {status: 404, error: error.message}, status: 404
   end
 
-  def paramenter_missing(error)
-    render json: {error: error.message}, status: 400
+  def rescue_400(error)
+    render json: {status: 400, error: error.message}, status: 400
   end
 end
