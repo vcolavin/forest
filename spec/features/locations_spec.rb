@@ -14,8 +14,15 @@ describe "Locations API", type: :request do
     expect(json['message']).not_to be_nil
     expect(json['data']['location']).not_to be_nil
     expect(json['data']['location']['objects']).not_to be_nil
+    expect(json['data']['location']['actions']).not_to be_nil
 
-    expect(json['data']['location']['objects'].first['name']).to eq(wolf.name)
+    response_wolf = json['data']['location']['objects'].first
+
+    expect(response_wolf['name']).to eq(wolf.name)
+    expect(response_wolf['kind']).to eq('wolf')
+
+    expect(response_wolf['actions']).not_to be_nil
+    expect(response_wolf['actions']['details']).not_to be_nil
   end
 
   it "responds properly to a location that doesn't exist" do
@@ -29,5 +36,4 @@ describe "Locations API", type: :request do
 
     expect(response.status).to be(400)
   end
-
 end
