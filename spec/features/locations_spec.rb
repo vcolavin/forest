@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Locations API", type: :request do
   context "is well formed" do
-    before :each do
+    before :all do
       @location = Location.create(x_coordinate: 1, y_coordinate: 2)
       @wolf = Wolf.create(name: "joseph", location: @location)
 
