@@ -28,7 +28,8 @@ Some thoughts and to-dos:
 - Let's make this HATEOAS.
   - Look into the url_for method for this
   - This will probably be achieved by having a "layout" to the responses, where each object description is surrounded or wrapped by endpoint options, e.g. navigation, look, zoom, whatever.
-  - How will the actions be grouped? They will be grouped per object. Movement will count as an action on a location e.g.
+  - Actions will be grouped per object. Movement will count as an action on a location. The name of an action will be the verb one could expect to type into a terminal to invoke the action.
+  E.g.
   ```
     "data": {
       "location": {
