@@ -29,7 +29,7 @@ Some thoughts and to-dos:
   - Look into the url_for method for this
   - This will probably be achieved by having a "layout" to the responses, where each object description is surrounded or wrapped by endpoint options, e.g. navigation, look, zoom, whatever.
   - How will the actions be grouped? They will be grouped per object. Movement will count as an action on a location e.g.
-    ```
+  ```
     "data": {
       "location": {
         "x": 1, "y": 2, ...,
@@ -53,7 +53,9 @@ Some thoughts and to-dos:
           }
         }]
       }
-    }```
+    }
+```
+
 - Consider the chron job that makes things grow and move around. How does it work?
   - It will call every object's #live method, which will be largely custom per model. It will move if it can, it will blah blah blah.
   - Can a free Heroku account even handle chron jobs?
