@@ -12,10 +12,10 @@ describe "Locations API", type: :request do
     expect(response.status).to be(200)
 
     expect(json['message']).not_to be_nil
-    expect(json['location']).not_to be_nil
-    expect(json['location']['objects']).not_to be_nil
+    expect(json['data']['location']).not_to be_nil
+    expect(json['data']['location']['objects']).not_to be_nil
 
-    expect(json['location']['objects'].first['name']).to eq(wolf.name)
+    expect(json['data']['location']['objects'].first['name']).to eq(wolf.name)
   end
 
   it "responds properly to a location that doesn't exist" do
