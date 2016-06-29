@@ -18,16 +18,9 @@ Some thoughts and to-dos:
   - Can you make a gem like Faker that produces words and phrases on demand?
     - Like MyFakerGem::Wolf.describe for example
   - Or maybe you will create decorators for the models that provide this functionality. Maybe *those* decorators will make use of a gem which provides phrases.
-- What do the routes look like? Presumably everything will be a GET.
-  - What sorts of non-destructive actions exist? In the real world? What about
-    - Look
-    - Go North, South, etc.
-    - Speak, shout, etc.
-    - Jump in place
-    - Zoom in and out
+
 - Let's make this HATEOAS.
-  - Look into the url_for method for this
-  - This will probably be achieved by having a "layout" to the responses, where each object description is surrounded or wrapped by endpoint options, e.g. navigation, look, zoom, whatever.
+  - Every object will have a url_for method that will automatically assume that will travel to that object. The "details" route.
   - Actions will be grouped per object. Movement will count as an action on a location. The name of an action will be the verb one could expect to type into a terminal to invoke the action.
   E.g.
   ```
