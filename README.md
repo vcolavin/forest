@@ -7,7 +7,7 @@ This is the API back end for a silly project currently under active development.
 
 Inspired by certain aspects of Dwarf Fortress, Minecraft, and [Proteus](http://twistedtreegames.com/proteus/). A read-only experience where someone can walk through a (hopefully) rich environment, looking closely at objects and animals, their histories, and relationships with each other.
 
-[Click here to see the API on Heroku!](http://restful-forest.herokuapp.com/api/v1/location&x=1&y=1)
+[Click here to see the API on Heroku!](http://restful-forest.herokuapp.com/api/v1/location?x=1&y=1)
 
 [You can read about development on here on my blog!](https://vcolavin.wordpress.com/tag/dev-blog/)
 
