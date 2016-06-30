@@ -36,23 +36,23 @@ describe Location, type: :model do
     let!(:location) { Location.create(x_coordinate: 2, y_coordinate: 2) }
 
     context 'directions' do
-      let!(:north_location) { Location.create(x_coordinate: 1, y_coordinate: 3) }
-      let!(:south_location) { Location.create(x_coordinate: 1, y_coordinate: 1) }
-      let!(:east_location) { Location.create(x_coordinate: 3, y_coordinate: 1) }
-      let!(:west_location) { Location.create(x_coordinate: 1, y_coordinate: 1) }
+      let!(:north_location) { Location.create(x_coordinate: 2, y_coordinate: 3) }
+      let!(:south_location) { Location.create(x_coordinate: 2, y_coordinate: 1) }
+      let!(:east_location) { Location.create(x_coordinate: 3, y_coordinate: 2) }
+      let!(:west_location) { Location.create(x_coordinate: 1, y_coordinate: 2) }
 
       it "should have cardinal direction methods that return locations" do
-        expect(location.north).to be(north_location)
-        expect(location.south).to be(south_location)
-        expect(location.east).to be(east_location)
-        expect(location.west).to be(west_location)
+        expect(location.north).to eq(north_location)
+        expect(location.south).to eq(south_location)
+        expect(location.east).to eq(east_location)
+        expect(location.west).to eq(west_location)
       end
 
-      it "should not be able to go off the map" do
+      it "should not return locations for directions that do not exist" do
         # TODO: should this raise an error or return nil?
         # TODO: this only tests for south and west borders.
-        expect(south_location.south).to be(nil)
-        expect(west_location.west).to be(nil)
+        expect(south_location.south).to eq(nil)
+        expect(west_location.west).to eq(nil)
       end
 
     end

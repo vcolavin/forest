@@ -22,6 +22,22 @@ class Location < ActiveRecord::Base
     self.y_coordinate
   end
 
+  def north
+    Location.find_by(x_coordinate: self.x, y_coordinate: self.y + 1)
+  end
+
+  def south
+    Location.find_by(x_coordinate: self.x, y_coordinate: self.y - 1)
+  end
+
+  def east
+    Location.find_by(x_coordinate: self.x + 1, y_coordinate: self.y)
+  end
+
+  def west
+    Location.find_by(x_coordinate: self.x - 1, y_coordinate: self.y)
+  end
+
   private
 
   def coordinates_must_be_unique
