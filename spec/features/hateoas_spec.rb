@@ -4,10 +4,11 @@ describe "HATEOAS", type: :request do
   before :all do
     @location = Location.create(x_coordinate: 2, y_coordinate: 2)
 
-    north_location = Location.create(x_coordinate: 2, y_coordinate: 3)
-    south_location = Location.create(x_coordinate: 2, y_coordinate: 1)
-    east_location = Location.create(x_coordinate: 3, y_coordinate: 2)
-    west_location = Location.create(x_coordinate: 1, y_coordinate: 2)
+    # all locations adjacent to @location
+    Location.create(x_coordinate: 2, y_coordinate: 3)
+    Location.create(x_coordinate: 2, y_coordinate: 1)
+    Location.create(x_coordinate: 3, y_coordinate: 2)
+    Location.create(x_coordinate: 1, y_coordinate: 2)
 
     @wolf = Wolf.create(name: "joseph", location: @location)
 
