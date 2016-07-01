@@ -55,4 +55,8 @@ describe "HATEOAS", type: :request do
     get wolf['actions']['details']
     expect(response).to be(200)
   end
+
+  # these are necessary because they rely on custom route metaprogramming and are gross as hell
+  it "url_for(location) works"
+  it "location_path(location) works"
 end
