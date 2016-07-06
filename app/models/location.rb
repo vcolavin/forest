@@ -17,20 +17,21 @@ class Location < ActiveRecord::Base
   def x; self.x_coordinate; end
   def y; self.y_coordinate; end
 
+  # these are relations, so they belong in the model rather than the presenter
   def north
-    Location.find_by(x_coordinate: self.x, y_coordinate: self.y + 1)
+    Location.find_by(x_coordinate: @location.x, y_coordinate: @location.y + 1)
   end
 
   def south
-    Location.find_by(x_coordinate: self.x, y_coordinate: self.y - 1)
+    Location.find_by(x_coordinate: @location.x, y_coordinate: @location.y - 1)
   end
 
   def east
-    Location.find_by(x_coordinate: self.x + 1, y_coordinate: self.y)
+    Location.find_by(x_coordinate: @location.x + 1, y_coordinate: @location.y)
   end
 
   def west
-    Location.find_by(x_coordinate: self.x - 1, y_coordinate: self.y)
+    Location.find_by(x_coordinate: @location.x - 1, y_coordinate: @location.y)
   end
 
   private

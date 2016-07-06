@@ -7,16 +7,17 @@ describe "Locations API", type: :request do
       @wolf = Wolf.create(name: "joseph", location: @location)
 
       get '/api/v1/location?x=2&y=2'
+      binding.pry
       @json = JSON.parse(response.body)
     end
 
-    it "message and data" do
+    it "for message and data" do
       expect(response.status).to eq(200)
       expect(@json['message']).not_to be_nil
       expect(@json['data']).not_to be_nil
     end
 
-    it "location" do
+    it "for location" do
       location = @json['data']['location']
 
       expect(location).not_to be_nil
@@ -29,7 +30,7 @@ describe "Locations API", type: :request do
       expect(location['objects'].count).to eq(1)
     end
 
-    it "wolf" do
+    it "for its objects" do
       wolf = @json['data']['location']['objects'].first
 
       expect(wolf['name']).to eq(@wolf.name)
