@@ -6,6 +6,11 @@ describe Tree, type: :model do
     @tree = Tree.create(number_of_branches: 4, location: @location)
   end
 
+  after :all do
+    Location.destroy_all
+    Tree.destroy_all
+  end
+
   it {should have_one :location}
 
   it "should have a location" do

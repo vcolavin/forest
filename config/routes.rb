@@ -17,4 +17,11 @@ Rails.application.routes.named_routes.path_helpers_module.module_eval do
     end
     api_v1_locations_path(options)
   end
+
+  def location_path(location = nil, options = {})
+    if location
+      options.merge!(x: location.x, y: location.y)
+    end
+    api_v1_locations_path(options)
+  end
 end

@@ -6,6 +6,11 @@ describe Wolf, type: :model do
     @wolf = Wolf.create(name: "Johnny", location: @location)
   end
 
+  after :all do
+    Location.destroy_all
+    Wolf.destroy_all
+  end
+
   it {should have_one :location}
 
   it "should have a location" do

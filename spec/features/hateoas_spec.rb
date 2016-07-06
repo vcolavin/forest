@@ -17,6 +17,11 @@ describe "HATEOAS", type: :request do
     @actions = @json['data']['location']['actions']
   end
 
+  after :all do
+    Location.destroy_all
+    Wolf.destroy_all
+  end
+
   context "location actions" do
     it "go north" do
       get @actions['north_url']

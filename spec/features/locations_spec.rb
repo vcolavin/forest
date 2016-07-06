@@ -10,6 +10,11 @@ describe "Locations API", type: :request do
       @json = JSON.parse(response.body)
     end
 
+    after :all do
+      Location.destroy_all
+      Wolf.destroy_all
+    end
+
     it "for message and data" do
       expect(response.status).to eq(200)
       expect(@json['message']).not_to be_nil
