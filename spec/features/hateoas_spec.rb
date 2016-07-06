@@ -14,45 +14,48 @@ describe "HATEOAS", type: :request do
 
     get '/api/v1/location?x=2&y=2'
     @json = JSON.parse(response.body)
+    @actions = @json['data']['location']['actions']
   end
 
-  it "location actions (movements)" do
-    actions = @json['data']['location']['actions']
+  context "location actions" do
+    it "go north" do
+      get @actions['north_url']
+      expect(response.status).to eq(200)
+      new_json = JSON.parse(response.body)
+      expect(new_json['data']['location']['x']).to eq(2)
+      expect(new_json['data']['location']['y']).to eq(3)
+    end
 
-    get actions['north']
-    expect(response.status).to eq(200)
-    json = JSON.parse(response.body)
-    expect(json['data']['location']['x']).to eq(2)
-    expect(json['data']['location']['y']).to eq(3)
+    it "go south" do
+      get @actions['south_url']
+      expect(response.status).to eq(200)
+      new_json = JSON.parse(response.body)
+      expect(new_json['data']['location']['x']).to eq(2)
+      expect(new_json['data']['location']['y']).to eq(1)
+      expect(new_json['data']['location']['actions']['south']).to be(nil)
+    end
 
+    it "go east" do
+      get @actions['east_url']
+      expect(response.status).to eq(200)
+      new_json = JSON.parse(response.body)
+      expect(new_json['data']['location']['x']).to eq(3)
+      expect(new_json['data']['location']['y']).to eq(2)
+    end
 
-    get actions['south']
-    expect(response.status).to eq(200)
-    json = JSON.parse(response.body)
-    expect(json['data']['location']['x']).to eq(2)
-    expect(json['data']['location']['y']).to eq(1)
-    expect(json['data']['location']['actions']['south']).to be(nil)
-
-
-    get actions['east']
-    expect(response.status).to eq(200)
-    json = JSON.parse(response.body)
-    expect(json['data']['location']['x']).to eq(3)
-    expect(json['data']['location']['y']).to eq(2)
-
-
-    get actions['west']
-    expect(response.status).to eq(200)
-    json = JSON.parse(response.body)
-    expect(json['data']['location']['x']).to eq(1)
-    expect(json['data']['location']['y']).to eq(2)
-    expect(json['data']['location']['actions']['west']).to be(nil)
+    it "go west" do
+      get @actions['west_url']
+      expect(response.status).to eq(200)
+      new_json = JSON.parse(response.body)
+      expect(new_json['data']['location']['x']).to eq(1)
+      expect(new_json['data']['location']['y']).to eq(2)
+      expect(new_json['data']['location']['actions']['west']).to be(nil)
+    end
   end
 
-  context "object actions" do
-    wolf = @json['data']['location']['objects'].first
-
-    get wolf['actions']['details']
-    expect(response).to be(200)
-  end
+  it "object actions"
+  #   wolf = @json['data']['location']['objects'].first
+  #   get wolf['actions']['details']
+  #   expect(response).to be(200)
+  # end
 end
