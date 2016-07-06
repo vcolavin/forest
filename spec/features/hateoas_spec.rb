@@ -12,7 +12,7 @@ describe "HATEOAS", type: :request do
 
     @wolf = Wolf.create(name: "joseph", location: @location)
 
-    get '/api/v1/location?x=2&y=2'
+    get '/api/v1/locations?x=2&y=2'
     @json = JSON.parse(response.body)
     @actions = @json['data']['location']['actions']
   end

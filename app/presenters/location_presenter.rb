@@ -33,7 +33,7 @@ class LocationPresenter
   def north_url
     north = @location.north
     if north
-      location_path(north)
+      locations_path(north)
     else
       nil
     end
@@ -42,7 +42,7 @@ class LocationPresenter
   def south_url
     south = @location.south
     if south
-      location_path(south)
+      locations_path(south)
     else
       nil
     end
@@ -51,7 +51,7 @@ class LocationPresenter
   def east_url
     east = @location.east
     if east
-      location_path(east)
+      locations_path(east)
     else
       nil
     end
@@ -60,7 +60,7 @@ class LocationPresenter
   def west_url
     west = @location.west
     if west
-      location_path(west)
+      locations_path(west)
     else
       nil
     end
