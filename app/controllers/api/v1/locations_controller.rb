@@ -6,7 +6,7 @@ class Api::V1::LocationsController < ApplicationController
       )
 
     raise ActiveRecord::RecordNotFound if location.nil?
-    binding.pry
+
     @location_presenter = LocationPresenter.new(location)
   end
 end

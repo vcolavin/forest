@@ -1,4 +1,6 @@
 class LocationPresenter
+  include Rails.application.routes.url_helpers
+
   def initialize(location)
     @location = location
   end
@@ -12,21 +14,21 @@ class LocationPresenter
     end
   end
 
-  # TODO: these need to return nil for locations that don't exist
+  # TODO: these ought to return nil for locations that don't exist
   def north_url
-    url_for(@location.north)
+    location_path(@location.north)
   end
 
   def south_url
-    url_for(@location.south)
+    location_path(@location.south)
   end
 
   def east_url
-    url_for(@location.east)
+    location_path(@location.east)
   end
 
   def west_url
-    url_for(@location.west)
+    location_path(@location.west)
   end
 
   private
