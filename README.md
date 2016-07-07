@@ -17,32 +17,63 @@ It doesn't involve any unusually complex setup. Bundle, create database, run see
 
 Here is a sample response, which is not yet completely implemented:
 ```
+  "message": "some generated message yay",
   "data": {
     "location": {
       "x": 1,
       "y": 2,
       "actions": {
-        "go_north": "/location?x=4&y=3",
-        "go_south": "etc.",
+        "north_url": "/location?x=4&y=3",
+        "south_url": "etc.",
         "jump": "etc.",
         ...
       },
       "objects": [
       {
         "kind": "tree",
-        "actions": {"details": "/tree/3"}
+        "actions": {"details_url": "/tree/3"}
       },
       {
         "kind": "wolf",
         "name": "jandice",
         "actions": {
-          "details": "/wolf/4",
-          "say_hello": "TODO: what does this look like?"
+          "details_url": "/wolf/4",
+          "say_hello_url": "/wolf/4/hello"
         }
       }]
     }
   }
 ```
+
+## More detailed notes on code stuff.
+### Locations
+- Locations are special and get to break a few rules.
+- Locations have a reverse-polymorphic relationship with other objects. [Read about RP on my blog here](https://vcolavin.wordpress.com/2016/06/01/reverse-polymorphism-aka-polymorphic-join/).
+- Location routes are not typically RESTful (`/locations/:id`), but use a less opaque route (`locations?x={x}&y={y}`). This is meant to make life easier on the consumer.
+
+### Object composition
+- Objects all their non-specific behavior from module injection.
+- These modules are defined in `lib/`
+
+### JBuilder views vs. Object#to_builder method
+- Every object has both a JBuilder view stored in `views/.../[objects]/show.json.jbuilder` in addition to a #to_builder method on its model.
+- This may seem redundant, but the JBuilder view is what is served when you visit that page, and the #to_builder method is used when that object is being summarized as belonging to a parent object, e.g. the response for a location with a wolf in it uses the Wolf#to_builder method.
+
+### Views and Decorators
+- I don't like the way Rails models tend to get "fat". View logic is abstracted into a decorator. Views are not allowed to touch models.
+- [This is why I'm not using Draper](http://thepugautomatic.com/2014/03/draper/)
+
+### Test coverage
+- I'm aiming for very high test coverage.
+- Most of this code is TDD'd.
+- What isn't TDD'd is tested shortly after.
+- Untested code can't make it into master.
+- Uncoded tests can.
+
+### HATEOAS
+- This app is HATEOAS. The user should be able to navigate using the API purely.
+- Actions in the response *and* decorator methods that generate action URIs all end in `_url`
+- URIs in the response are relative, not absolute. I.e. `api/v1/locations?x=1&y=2`, not `http://some-host.com/locations?x=1&y=2`.
 
 ## Some plans.
 - The interesting part of this apps development (the life of the animals) has not yet begun. I might be in over my head. I will find out.
@@ -54,10 +85,6 @@ Here is a sample response, which is not yet completely implemented:
 
 - Every object will have a history, or log.
   - This will include movements, interactions, and will be viewable.
-
-- This app is HATEOAS
-  - Every object will have a url_for method that will automatically assume that will travel to that object. The "details" route.
-  - Actions will be grouped per object. Movement will count as an action on a location. The name of an action will be the verb one could expect to type into a terminal to invoke the action.
 
 - This app will rely on chron jobs to call each objects `#live` method, triggering a "turn" of life in the forest.
   - Can a free Heroku account even handle chron jobs?
