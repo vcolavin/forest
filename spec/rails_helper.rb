@@ -23,6 +23,8 @@ RSpec.configure do |config|
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
+
+  config.include Rails.application.routes.url_helpers
 end
 
 Shoulda::Matchers.configure do |config|
