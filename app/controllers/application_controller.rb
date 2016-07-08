@@ -2,9 +2,8 @@ class ApplicationController < ActionController::API
   include ActionController::ImplicitRender
   include ActionView::Layouts
 
-  rescue_from ActiveRecord::RecordNotFound, :with => :rescue_404
-  rescue_from ActionController::RoutingError, :with => :rescue_404
-
+  rescue_from ActiveRecord::RecordNotFound,       :with => :rescue_404
+  rescue_from ActionController::RoutingError,     :with => :rescue_404
   rescue_from ActionController::ParameterMissing, :with => :rescue_400
 
   private

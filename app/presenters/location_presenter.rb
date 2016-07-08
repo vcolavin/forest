@@ -30,6 +30,7 @@ class LocationPresenter
     actions
   end
 
+  # TODO: I'd love to refactor these directional methods
   def north_url
     north = @location.north
     if north
