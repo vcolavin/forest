@@ -6,17 +6,22 @@ describe "Locations API", type: :request do
       @location = Location.create(x_coordinate: 2, y_coordinate: 2)
       @wolf = Wolf.create(name: "joseph", location: @location)
 
-      get '/api/v1/location?x=2&y=2'
+      get '/api/v1/locations?x=2&y=2'
       @json = JSON.parse(response.body)
     end
 
-    it "message and data" do
+    after :all do
+      Location.destroy_all
+      Wolf.destroy_all
+    end
+
+    it "for message and data" do
       expect(response.status).to eq(200)
       expect(@json['message']).not_to be_nil
       expect(@json['data']).not_to be_nil
     end
 
-    it "location" do
+    it "for location" do
       location = @json['data']['location']
 
       expect(location).not_to be_nil
@@ -29,7 +34,7 @@ describe "Locations API", type: :request do
       expect(location['objects'].count).to eq(1)
     end
 
-    it "wolf" do
+    xit "for its objects" do
       wolf = @json['data']['location']['objects'].first
 
       expect(wolf['name']).to eq(@wolf.name)
@@ -41,13 +46,13 @@ describe "Locations API", type: :request do
   end
 
   it "responds properly to a location that doesn't exist" do
-    get '/api/v1/location?x=100000&y=1'
+    get '/api/v1/locations?x=100000&y=1'
 
     expect(response.status).to eq(404)
   end
 
   it "responds to a request with poorly formed parameters" do
-    get '/api/v1/location?x=1'
+    get '/api/v1/locations?x=1'
 
     expect(response.status).to eq(400)
   end

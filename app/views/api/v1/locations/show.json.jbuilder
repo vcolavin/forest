@@ -1,9 +1,10 @@
 json.location do
-  json.x(@location.x)
-  json.y(@location.y)
+  json.x(@location_presenter.x)
+  json.y(@location_presenter.y)
+
+  json.actions(@location_presenter.actions)
 
   json.objects do
-    object_attributes = @location.objects.map {|object| object.to_builder.attributes!}
-    json.array!(object_attributes)
+    json.array!(@location_presenter.object_attributes)
   end
 end

@@ -11,60 +11,69 @@ Inspired by certain aspects of Dwarf Fortress, Minecraft, and [Proteus](http://t
 
 [You can read about development on here on my blog!](https://vcolavin.wordpress.com/tag/dev-blog/)
 
-##Technical details and installation
+## Installation
 
 It doesn't involve any unusually complex setup. Bundle, create database, run seeds, and run server, as per usual.
 
-Here is a sample response, which is not yet completely implemented:
+## Sample response
 ```
+  "message": "some generated message yay",
   "data": {
     "location": {
       "x": 1,
       "y": 2,
       "actions": {
-        "go_north": "/location?x=4&y=3",
-        "go_south": "etc.",
-        "jump": "etc.",
+        "north_url": "/locations?x=1&y=3",
+        "south_url": "/locations?x=1&y=3",
         ...
       },
       "objects": [
       {
         "kind": "tree",
-        "actions": {"details": "/tree/3"}
+        "actions": {"details_url": "/trees/3"}
       },
       {
         "kind": "wolf",
         "name": "jandice",
         "actions": {
-          "details": "/wolf/4",
-          "say_hello": "TODO: what does this look like?"
+          "details_url": "/wolves/4",
+          "say_hello_url": "/wolves/4/say_hello"
         }
       }]
     }
   }
 ```
 
-## Some plans.
-- The interesting part of this apps development (the life of the animals) has not yet begun. I might be in over my head. I will find out.
+## More detailed notes on code stuff.
+### Requests
+- Only accepts GET requests; the forest is read-only.
 
-- Every object will have a description.
-  - Can you make a gem like Faker that produces words and phrases on demand?
-    - Like MyFakerGem::Wolf.describe for example
-  - Or maybe you will create decorators for the models that provide this functionality. Maybe *those* decorators will make use of a gem which provides phrases.
+### Locations
+- Locations are special and get to break a few rules.
+- Locations have a reverse-polymorphic relationship with other objects. [Read about RP on my blog here](https://vcolavin.wordpress.com/2016/06/01/reverse-polymorphism-aka-polymorphic-join/).
+- Location routes are not typically RESTful (`/locations/:id`), but use a less opaque route (`locations?x={x}&y={y}`). This is meant to make life easier on the consumer.
 
-- Every object will have a history, or log.
-  - This will include movements, interactions, and will be viewable.
+### Object composition
+- Objects all their non-specific behavior from module injection. Composition is always favored over classical inheritance.
+- These modules are defined in `lib/`
 
-- This app is HATEOAS
-  - Every object will have a url_for method that will automatically assume that will travel to that object. The "details" route.
-  - Actions will be grouped per object. Movement will count as an action on a location. The name of an action will be the verb one could expect to type into a terminal to invoke the action.
+### JBuilder views vs. Object#to_builder method
+- Every object has both a JBuilder view stored in `views/.../[objects]/show.json.jbuilder` in addition to a #to_builder method on its model.
+- This may seem redundant, but the JBuilder view is what is served when you visit that object's show page (i.e. its "details" action), and the #to_builder method is used when that object is being summarized in another object's page, e.g. the response for a location with a wolf in it uses the Wolf#to_builder method.
 
-- This app will rely on chron jobs to call each objects `#live` method, triggering a "turn" of life in the forest.
-  - Can a free Heroku account even handle chron jobs?
-  - This will be a great opportunity to learn basic game dev ideas, such as AI pathfinding and decision trees and such.
+### Views and Decorators
+- I don't like the way Rails models tend to get "fat". View logic is abstracted into a decorator. Views are not allowed to touch models.
+- [This is why I'm not using Draper](http://thepugautomatic.com/2014/03/draper/)
 
-- The forest's seeds will be unusually important. They will be actively worked on to create a more
-  - To that end, every time new things are added to the forest, new seeds might have to be written in order to not completely wipe the forest
+### Test coverage
+- I'm aiming for very high test coverage.
+- Most of this code is TDD'd.
+- What isn't TDD'd is tested shortly after.
+
+### HATEOAS
+- This app is HATEOAS. The user should be able to navigate using the API purely.
+- Actions in the response *and* decorator methods that generate action URIs all end in `_url`
+- URIs in the response are relative, not absolute. I.e. `api/v1/locations?x=1&y=2`, not `http://some-host.com/locations?x=1&y=2`.
 
 ## The front end
 Here are some temporary notes about the front-end, which is not being developed at all right now.
@@ -72,5 +81,6 @@ Here are some temporary notes about the front-end, which is not being developed 
   - It will resemble a terminal.
   - It would be fun for it to use D3 to make interesting visualizations based on data served by the app (e.g. animal distribution heatmaps, bar graphs of interaction types)
 
-## Other
-I'm interested in eventually making a non-JS (pure HTML + CSS) version of this app available. I'm still thinking about how that would get done.
+## Contributing
+- If you've got a one time bugfix, you can either submit a PR or open up an issue. Please make sure all tests pass before submitting a PR!
+- If you want to become a regular contributor, please shoot me a message to vcolavin (at) gmail, or on twitter @vincentcolavin. I am very friendly!

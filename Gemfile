@@ -20,5 +20,3 @@ group :test do
   gem 'rspec'
   gem 'shoulda-matchers', '~> 3.1'
 end
-
-# gem 'unicorn'

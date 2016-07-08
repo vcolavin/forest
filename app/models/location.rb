@@ -14,12 +14,23 @@ class Location < ActiveRecord::Base
     end
   end
 
-  def x
-    self.x_coordinate
+  def x; self.x_coordinate; end
+  def y; self.y_coordinate; end
+
+  def north
+    Location.find_by(x_coordinate: self.x, y_coordinate: self.y + 1)
   end
 
-  def y
-    self.y_coordinate
+  def south
+    Location.find_by(x_coordinate: self.x, y_coordinate: self.y - 1)
+  end
+
+  def east
+    Location.find_by(x_coordinate: self.x + 1, y_coordinate: self.y)
+  end
+
+  def west
+    Location.find_by(x_coordinate: self.x - 1, y_coordinate: self.y)
   end
 
   private

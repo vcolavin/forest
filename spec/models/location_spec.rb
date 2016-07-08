@@ -32,19 +32,43 @@ describe Location, type: :model do
     end
   end
 
-  context 'with a wolf and tree' do
-    let!(:location) { Location.create(x_coordinate: 1, y_coordinate: 1) }
-    let!(:wolf) { Wolf.create(name: "Johnny", location: location) }
-    let!(:tree) { Tree.create(number_of_branches: 4, location: location) }
+  context 'associations' do
+    let!(:location) { Location.create(x_coordinate: 2, y_coordinate: 2) }
 
-    it "should be associated to locatable objects" do
-      expect(location.objects).to include(wolf)
-      expect(location.objects).to include(tree)
+    context 'directions' do
+      let!(:north_location) { Location.create(x_coordinate: 2, y_coordinate: 3) }
+      let!(:south_location) { Location.create(x_coordinate: 2, y_coordinate: 1) }
+      let!(:east_location) { Location.create(x_coordinate: 3, y_coordinate: 2) }
+      let!(:west_location) { Location.create(x_coordinate: 1, y_coordinate: 2) }
+
+      it "should have cardinal direction methods that return locations" do
+        expect(location.north).to eq(north_location)
+        expect(location.south).to eq(south_location)
+        expect(location.east).to eq(east_location)
+        expect(location.west).to eq(west_location)
+      end
+
+      it "should not return locations for directions that do not exist" do
+        # TODO: this only tests for south and west borders.
+        expect(south_location.south).to eq(nil)
+        expect(west_location.west).to eq(nil)
+      end
+
+    end
+    context 'objects' do
+      let!(:wolf) { Wolf.create(name: "Johnny", location: location) }
+      let!(:tree) { Tree.create(number_of_branches: 4, location: location) }
+
+      it "should be associated to locatable objects" do
+        expect(location.objects).to include(wolf)
+        expect(location.objects).to include(tree)
+      end
+
+      it "should have methods for scoping specific locatable objects" do
+        expect(location.wolves).to match_array([wolf])
+        expect(location.trees).to match_array([tree])
+      end
     end
 
-    it "should have methods for scoping specific locatable objects" do
-      expect(location.wolves).to match_array([wolf])
-      expect(location.trees).to match_array([tree])
-    end
   end
 end
