@@ -17,7 +17,6 @@ class Location < ActiveRecord::Base
   def x; self.x_coordinate; end
   def y; self.y_coordinate; end
 
-  # these are relations, so they belong in the model rather than the presenter
   def north
     Location.find_by(x_coordinate: self.x, y_coordinate: self.y + 1)
   end
