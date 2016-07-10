@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/vcolavin/forest.svg?branch=master)](https://travis-ci.org/vcolavin/forest)
+
 # A RESTful forest
 Get it?
 
