@@ -5,6 +5,6 @@ services:
  - postgresql
 test:
   adapter: postgresql
-  database: travis_ci_test
-before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+  database: forest_test
+# before_script:
+#   - psql -c 'create database forest_test;' -U postgres
