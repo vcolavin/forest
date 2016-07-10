@@ -6,5 +6,5 @@ services:
 test:
   adapter: postgresql
   database: forest_test
-# before_script:
-#   - psql -c 'create database forest_test;' -U postgres
+before_script:
+  - psql -c 'create database forest_test;' -U postgres
