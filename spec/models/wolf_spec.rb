@@ -17,14 +17,12 @@ describe Wolf, type: :model do
   end
 
   context "movement methods" do
-    it "should be able to move" do
+    it "should be able to move, but not off the map" do
       @wolf.go_north!
       expect(@wolf.location).to eq(@north_location)
-    end
 
-    it "should not be able to move off the map" do
       @wolf.go_west!
-      expect(@wolf.location).to eq(@location)
+      expect(@wolf.location).to eq(@north_location)
     end
   end
 end
