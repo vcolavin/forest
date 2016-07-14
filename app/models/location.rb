@@ -3,6 +3,8 @@ class Location < ActiveRecord::Base
 
   has_many :wolves, :through => :location_objects, :source => :object, :source_type => 'Wolf', inverse_of: :location
   has_many :trees, :through => :location_objects, :source => :object, :source_type => 'Tree', inverse_of: :location
+  has_many :trees, :through => :location_objects, :source => :object, :source_type => 'Rabbit', inverse_of: :location
+
 
   validates :x_coordinate, presence: true
   validates :y_coordinate, presence: true

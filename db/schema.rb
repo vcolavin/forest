@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419214805) do
+ActiveRecord::Schema.define(version: 20160714163330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(version: 20160419214805) do
   end
 
   add_index "locations", ["x_coordinate", "y_coordinate"], name: "index_locations_on_x_coordinate_and_y_coordinate", unique: true, using: :btree
+
+  create_table "rabbits", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "trees", force: :cascade do |t|
     t.integer  "number_of_branches"
