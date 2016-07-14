@@ -1,4 +1,6 @@
 module ObjectHelpers
+  delegate :north, :south, :east, :west, :to => :location, :prefix => false
+
   def kind
     self.class.to_s.downcase
   end
