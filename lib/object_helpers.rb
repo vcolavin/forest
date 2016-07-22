@@ -1,7 +1,7 @@
 module ObjectHelpers
   # this could exist in a Locatable decorator, but
   # because every object is Locatable, it seems easiest to have them here
-  delegate :north, :south, :east, :west, :to => :location, :prefix => false
+  delegate :north, :south, :east, :west, :x, :y, :to => :location, :prefix => false
 
   def kind
     self.class.to_s.downcase
