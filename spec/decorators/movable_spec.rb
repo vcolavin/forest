@@ -20,6 +20,13 @@ describe Movable, type: :model do
   after :all do
     Location.destroy_all
     Wolf.destroy_all
+    Tree.destroy_all
+  end
+
+  xit "shouldn't be able to decorate immovable objects" do
+    tree = Tree.create(number_of_branches: 1, location: @location)
+
+    expect(Movable.new(tree)).to throw(SomeError)
   end
 
   it "can move north" do
