@@ -5,13 +5,15 @@ describe Movable, type: :model do
     @location = Location.create(x_coordinate: 2, y_coordinate: 2)
     @north_location = Location.create(x_coordinate: 2, y_coordinate: 3)
     @south_location = Location.create(x_coordinate: 2, y_coordinate: 1)
+    @east_location = Location.create(x_coordinate: 3, y_coordinate: 1)
+    @west_location = Location.create(x_coordinate: 1, y_coordinate: 1)
 
     wolf = Wolf.create(name: "joseph", location: @location)
 
     @movable = Movable.new(wolf)
   end
 
-  after :each do
+  before :each do
     @movable.location = @location
   end
 
@@ -40,7 +42,7 @@ describe Movable, type: :model do
     expect(@movable.location).to eq(@west_location)
   end
 
-  it "can't be made to move off the map" do
+  it "can't be made to move to a location that doesn't exist" do
     @movable.move_south!
     @movable.move_south!
 
