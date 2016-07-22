@@ -56,16 +56,15 @@ It doesn't involve any unusually complex setup. Bundle, create database, run see
 - Location routes are not typically RESTful (`/locations/:id`), but use a less opaque route (`locations?x={x}&y={y}`). This is meant to make life easier on the consumer.
 
 ### Object composition
-- Objects all their non-specific behavior from module injection. Composition is always favored over classical inheritance.
-- These modules are defined in `lib/`
+- Objects gain behavior by being decorated.
+- For example, to move a wolf: `Movable.new(wolf).move_north!`
 
 ### JBuilder views vs. Object#to_builder method
 - Every object has both a JBuilder view stored in `views/.../[objects]/show.json.jbuilder` in addition to a #to_builder method on its model.
 - This may seem redundant, but the JBuilder view is what is served when you visit that object's show page (i.e. its "details" action), and the #to_builder method is used when that object is being summarized in another object's page, e.g. the response for a location with a wolf in it uses the Wolf#to_builder method.
 
-### Views and Decorators
-- I don't like the way Rails models tend to get "fat". View logic is abstracted into a decorator. Views are not allowed to touch models.
-- [This is why I'm not using Draper](http://thepugautomatic.com/2014/03/draper/)
+### Views and Presenter
+- I don't like the way Rails models tend to get "fat". View logic is abstracted into a presenter. Views are not allowed to touch models
 
 ### Test coverage
 - I'm aiming for very high test coverage.
