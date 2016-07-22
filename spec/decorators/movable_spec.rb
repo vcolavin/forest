@@ -4,10 +4,15 @@ describe Movable, type: :model do
   before :all do
     @location = Location.create(x_coordinate: 2, y_coordinate: 2)
     @north_location = Location.create(x_coordinate: 2, y_coordinate: 3)
+    @south_location = Location.create(x_coordinate: 2, y_coordinate: 1)
 
     wolf = Wolf.create(name: "joseph", location: @location)
 
     @movable = Movable.new(wolf)
+  end
+
+  after :each do
+    @movable.location = @location
   end
 
   after :all do
@@ -15,15 +20,35 @@ describe Movable, type: :model do
     Wolf.destroy_all
   end
 
-  it "can be made to move in a particular direction with a couple different syntaxes" do
+  it "can move north" do
     @movable.move_north!
     expect(@movable.location).to eq(@north_location)
-    @movable.move!("south")
-    expect(@movable.location).to eq(@location)
+  end
+
+  it "can move south" do
+    @movable.move_south!
+    expect(@movable.location).to eq(@south_location)
+  end
+
+  it "can move east" do
+    @movable.move_east!
+    expect(@movable.location).to eq(@east_location)
+  end
+
+  it "can move west" do
+    @movable.move_west!
+    expect(@movable.location).to eq(@west_location)
+  end
+
+  it "can't be made to move off the map" do
+    @movable.move_south!
+    @movable.move_south!
+
+    expect(@movable.location).to eq(@south_location)
   end
 
   it "can move of its own will" do
     @movable.move!
-    expect(@mvoable.location).not_to eq(@location)
+    expect(@movable.location).not_to eq(@location)
   end
 end

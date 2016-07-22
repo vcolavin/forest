@@ -49,7 +49,6 @@ describe Location, type: :model do
       end
 
       it "should not return locations for directions that do not exist" do
-        # TODO: this only tests for south and west borders.
         expect(south_location.south).to eq(nil)
         expect(west_location.west).to eq(nil)
       end
