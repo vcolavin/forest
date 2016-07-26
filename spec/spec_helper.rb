@@ -1,4 +1,4 @@
-ENV['RAILS_ENV'] ||= 'test'
+ENV['RAILS_ENV'] ||= 'test' # this shouldn't need to be here but breaks otherwise
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/autorun'
 
