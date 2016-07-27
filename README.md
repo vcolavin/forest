@@ -1,6 +1,8 @@
 # A RESTful forest
 Get it?
 
+![logo](https://raw.githubusercontent.com/descartez/forest-client/master/docs/img/forest-logo.png)
+
 ## Introduction
 
 This is the API back end for a silly project currently under active development.
