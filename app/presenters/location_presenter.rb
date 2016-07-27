@@ -30,41 +30,24 @@ class LocationPresenter
     actions
   end
 
-  # TODO: I'd love to refactor these directional methods
   def north_url
     north = @location.north
-    if north
-      locations_path(north)
-    else
-      nil
-    end
+    north ? locations_path(north) : nil
   end
 
   def south_url
     south = @location.south
-    if south
-      locations_path(south)
-    else
-      nil
-    end
+    south ? locations_path(south) : nil
   end
 
   def east_url
     east = @location.east
-    if east
-      locations_path(east)
-    else
-      nil
-    end
+    east ? locations_path(east) : nil
   end
 
   def west_url
     west = @location.west
-    if west
-      locations_path(west)
-    else
-      nil
-    end
+    west ? locations_path(west) : nil
   end
 
   private

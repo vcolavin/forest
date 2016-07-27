@@ -49,12 +49,11 @@ describe Location, type: :model do
       end
 
       it "should not return locations for directions that do not exist" do
-        # TODO: this only tests for south and west borders.
         expect(south_location.south).to eq(nil)
         expect(west_location.west).to eq(nil)
       end
-
     end
+
     context 'objects' do
       let!(:wolf) { Wolf.create(name: "Johnny", location: location) }
       let!(:tree) { Tree.create(number_of_branches: 4, location: location) }
@@ -69,6 +68,5 @@ describe Location, type: :model do
         expect(location.trees).to match_array([tree])
       end
     end
-
   end
 end
