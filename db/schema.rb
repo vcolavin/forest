@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20160714163330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "tablefunc"
 
   create_table "location_objects", force: :cascade do |t|
     t.integer  "location_id"
@@ -24,6 +23,8 @@ ActiveRecord::Schema.define(version: 20160714163330) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "location_objects", ["object_id", "object_type"], name: "index_location_objects_on_object_id_and_object_type", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.integer "x_coordinate"
