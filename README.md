@@ -1,8 +1,5 @@
 [![Build Status](https://travis-ci.org/vcolavin/forest.svg?branch=master)](https://travis-ci.org/vcolavin/forest)
 
-# A RESTful forest
-Get it?
-
 ![logo](https://raw.githubusercontent.com/descartez/forest-client/master/docs/img/forest-logo.png)
 
 ## Introduction
